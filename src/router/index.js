@@ -12,7 +12,7 @@ const routes = [
     path: '/', redirect: '/posts'
   },
   {
-    path: 'userDetails/:id', 
+    path: '/userDetails/:id', 
     component: UserDetails
   },
   {

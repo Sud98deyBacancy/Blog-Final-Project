@@ -9,10 +9,17 @@
 </template>
 
 <script>
-
-
+// import axios from 'axios'
 export default {
-  
+  created() {
+  },
+  data() {
+    return {
+    }
+  },
+  methods: {
+    
+  }
 }
 </script>
 
