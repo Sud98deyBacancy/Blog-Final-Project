@@ -13,15 +13,11 @@
         <p class="body" :title="post.body">{{ post.body.slice(0,70) + '...'}}</p>
       </b-row>
       <b-row class="row2">
-        <b-col cols="3">
-          <b-button class="button"
-            ><router-link :to="'/posts/' + post.id"
-              >Details</router-link
-            ></b-button
-          >
-        </b-col>
         <b-col cols="9" class="userName">
-          <router-link :to="'/userDetails/' + post.userId">@ {{ userName(post.userId) }} ( {{ name() }} )</router-link>
+          <!-- <router-link :to="'/userDetails/' + post.userId">@ {{ userName(post.userId) }} ( {{ name() }} )</router-link> -->
+          <router-link :to="'/userDetails/' + post.userId">
+            <post-user-info :userId="post.userId" :users="allUsers"></post-user-info>
+          </router-link>
         </b-col>
       </b-row>
     </b-card>
@@ -30,20 +26,25 @@
 
 <script>
 import axios from 'axios';
+import PostUserInfo from './PostUserInfo.vue'
 
 export default {
   name: "basePost",
+  components: {
+    PostUserInfo
+  },
   props: ["posts"],
   created() {
+    console.log('created hook');
     this.getUsers();
   },
   data() {
     return {
       allUsers: [],
-      userDetails: {
-        username: '',
-        name: ''
-      }
+      // userDetails: {
+      //   username: '',
+      //   name: ''
+      // }
     };
   },
   methods: {
@@ -63,17 +64,17 @@ export default {
     background: function(postId) {
       return postId % 2 == 0 ? '#A3C3B0' : '#DEA7A1';
     },
-    userName(userId) {
-      var currentUser = this.allUsers[userId-1];
+    // userName(userId) {
+    //   var currentUser = this.allUsers[userId-1];
       
-      this.userDetails.username = currentUser.username;
-      this.userDetails.name = currentUser.name;
+    //   this.userDetails.username = currentUser.username;
+    //   this.userDetails.name = currentUser.name;
 
-      return this.userDetails.username;
-    },
-    name() {
-      return this.userDetails.name;
-    }
+    //   return this.userDetails.username;
+    // },
+    // name() {
+    //   return this.userDetails.name;
+    // }
   },
 };
 </script>

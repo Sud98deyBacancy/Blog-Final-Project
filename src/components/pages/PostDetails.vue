@@ -44,7 +44,7 @@ export default {
   data() {
     return {
       postId: this.$route.params.id,
-      postDetails: {},
+      postDetails: null,
       userDetails: {
         username: "",
         name: "",
