@@ -4,7 +4,9 @@
   <router-link to="/posts/1" exact>agesrfes</router-link> -->
   <!-- <router-link to="/posts/notFound" exact>Not Found</router-link> -->
   <!-- <router-view></router-view> -->
+  <!-- <keep-alive> -->
   <base-post :posts="allPosts"></base-post>
+  <!-- </keep-alive> -->
 </div>
   
 </template>
