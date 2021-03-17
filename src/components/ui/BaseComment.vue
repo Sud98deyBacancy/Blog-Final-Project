@@ -1,6 +1,4 @@
 <template>
-<!-- <p>{{ comments }}</p> -->
-<!-- <p>sdsavfsdvfsd</p> -->
   <b-col cols="12">
     <b-col cols="10" v-for="comment in comments" :key="comment.id" class="comment">
       {{ comment.body }}

@@ -15,7 +15,6 @@
         <router-link :to="'/userDetails/' + this.postDetails.userId"
           >@{{ userDetails.username }} ({{ userDetails.name }})</router-link
         >
-        <!-- <p>@{{ userDetails.username }} ({{ userDetails.name }})</p> -->
       </b-col>
     </b-row>
     <hr />
@@ -38,16 +37,12 @@ export default {
   components: {
     baseComment,
   },
-  // props: ['postId'],
   mounted() {
     this.getPostDetails(this.postId);
     this.getComments(this.postId);
-    // this.getUserDetails(this.postDetails.userId);
   },
   data() {
     return {
-      // userId: this.$route.params.id,
-      // userDetails: {},
       postId: this.$route.params.id,
       postDetails: {},
       userDetails: {
@@ -65,9 +60,6 @@ export default {
           this.postDetails = {
             ...res.data,
           };
-          console.log("post details");
-          console.log(this.postDetails);
-          // console.log(this.postDetails.body);
           this.getUserDetails(this.postDetails.userId);
         })
         .catch((error) => console.log(error));
@@ -78,11 +70,9 @@ export default {
         .get("https://jsonplaceholder.typicode.com/comments?postId=" + id)
         .then((res) => {
           this.allComments = res.data;
-          // console.log(this.comments);
         });
     },
     getUserDetails(id) {
-      console.log("inside userdetails func");
       axios
         .get("https://jsonplaceholder.typicode.com/users/" + id)
         .then((res) => {
@@ -125,7 +115,6 @@ hr {
 
 .commentHr {
   width: 30%;
-  /* background-color: darkslategrey; */
   margin: 0 auto;
   margin-bottom: 2%;
 }

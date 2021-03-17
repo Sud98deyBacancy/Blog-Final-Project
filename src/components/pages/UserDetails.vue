@@ -6,7 +6,7 @@
       </b-col>
     </b-row>
     <b-card>
-      <b-row>
+      <b-row v-if="userDetails">
         <b-col cols="12">
           <p class="username">@{{ userDetails.username }}</p>
         </b-col>
@@ -17,7 +17,7 @@
         <b-col cols="12">
           <p>{{ userDetails.email }}</p>
         </b-col>
-        <b-col cols="12">
+        <b-col cols="12" v-if="userDetails.address">
           <p>
             {{ userDetails.address.street }}, {{ userDetails.address.suite }},
             {{ userDetails.address.city }}, {{ userDetails.address.zipcode }}.
@@ -30,8 +30,8 @@
         <b-col cols="12">
           <p>{{ userDetails.website }}</p>
         </b-col>
-        <b-col cols="12">
-          <p>{{ userDetails.company.name }}</p>
+        <b-col cols="12" >
+          <p>{{ userDetails.company ? userDetails.company.name : '' }}</p>
         </b-col>
       </b-row>
     </b-card>
@@ -42,16 +42,13 @@
 import axios from "axios";
 
 export default {
-  name: "UserDetails",
   created() {
     this.getUserDetails();
-    // this.userId = this.
   },
-  // props: ['userId']
   data() {
     return {
       userId: this.$route.params.id,
-      userDetails: {},
+      userDetails: null,
     };
   },
   methods: {
@@ -86,7 +83,6 @@ h1 {
 .username {
   font-weight: 600;
   font-size: 130%;
-  /* text-align: center; */
 }
 
 hr {

@@ -18,17 +18,6 @@ const routes = [
   {
     path: '/posts',
     component: Posts,
-    // children: [
-    //   {
-    //     path: 'notFound',
-    //     component: NotFound
-    //   },
-    //   {
-    //     path: ':id', 
-    //     component: PostDetails
-    //   },
-      
-    // ]
   },
   {
     path: '/posts/:id', 
@@ -37,19 +26,6 @@ const routes = [
   {
     path: '*', component: NotFound
   }
-  // {
-  //   path: '/',
-  //   name: 'Home',
-  //   component: Home
-  // },
-  // {
-  //   path: '/about',
-  //   // name: 'About',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
 ]
 
 const router = new VueRouter({

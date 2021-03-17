@@ -1,12 +1,6 @@
 <template>
 <div>
-  <!-- <h1>Posts</h1>
-  <router-link to="/posts/1" exact>agesrfes</router-link> -->
-  <!-- <router-link to="/posts/notFound" exact>Not Found</router-link> -->
-  <!-- <router-view></router-view> -->
-  <!-- <keep-alive> -->
   <base-post :posts="allPosts"></base-post>
-  <!-- </keep-alive> -->
 </div>
   
 </template>
@@ -20,7 +14,6 @@ export default {
   name: 'Posts',
   created() {
     this.getAllPosts();
-    // this.getAllUsers();
   },
   data() {
     return {
@@ -32,24 +25,9 @@ export default {
       axios.get('https://jsonplaceholder.typicode.com/posts')
         .then(res => {
           this.allPosts = res.data;
-          // console.log(this.allPosts);
         })
         .catch(error => console.log(error));
     },
-    // getAllUsers: async function() {
-      // await axios.get('https://jsonplaceholder.typicode.com/users')
-      //   .then(res => {
-      //     this.allUsers = res.data;
-      //   })
-      //   .catch(error => console.log(error)
-      //   );
-    // }
   }
-  
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>
