@@ -10,13 +10,17 @@
         <p class="title">
           <router-link :to="'/posts/' + post.id">{{ post.title }}</router-link>
         </p>
-        <p class="body" :title="post.body">{{ post.body.slice(0,70) + '...'}}</p>
+        <p class="body" :title="post.body">
+          {{ post.body.slice(0, 70) + "..." }}
+        </p>
       </b-row>
-      <b-row class="row2">
-        <b-col cols="9" class="userName">
-          <!-- <router-link :to="'/userDetails/' + post.userId">@ {{ userName(post.userId) }} ( {{ name() }} )</router-link> -->
+      <b-row class="row2" align-h="end">
+        <b-col cols="5" class="userName">
           <router-link :to="'/userDetails/' + post.userId">
-            <post-user-info :userId="post.userId" :users="allUsers"></post-user-info>
+            <post-user-info
+              :userId="post.userId"
+              :users="allUsers"
+            ></post-user-info>
           </router-link>
         </b-col>
       </b-row>
@@ -25,71 +29,52 @@
 </template>
 
 <script>
-import axios from 'axios';
-import PostUserInfo from './PostUserInfo.vue'
+import axios from "axios";
+import PostUserInfo from "./PostUserInfo.vue";
 
 export default {
   name: "basePost",
   components: {
-    PostUserInfo
+    PostUserInfo,
   },
   props: ["posts"],
-  created() {
-    console.log('created hook');
-    this.getUsers();
+  mounted() {
+    setTimeout(() => {
+      axios
+        .get("https://jsonplaceholder.typicode.com/users")
+        .then((res) => {
+          this.allUsers = res.data;
+        })
+        .catch((error) => console.log("error in users: ", error));
+    }, 2000);
   },
   data() {
     return {
       allUsers: [],
-      // userDetails: {
-      //   username: '',
-      //   name: ''
-      // }
     };
   },
   methods: {
-    getUsers() {
-      axios.get('https://jsonplaceholder.typicode.com/users')
-        .then(res => {
-          this.allUsers = res.data;
-        })
-        .catch(error => console.log(error)
-        );
-    },
     imgSource: function(postId) {
       return postId % 2 == 0
         ? "https://cdn.pixabay.com/photo/2021/02/08/16/03/dinosaur-5995333_1280.png"
         : "https://cdn.pixabay.com/photo/2017/04/19/10/24/vinyl-2241789_1280.png";
     },
     background: function(postId) {
-      return postId % 2 == 0 ? '#A3C3B0' : '#DEA7A1';
+      return postId % 2 == 0 ? "#A3C3B0" : "#DEA7A1";
     },
-    // userName(userId) {
-    //   var currentUser = this.allUsers[userId-1];
-      
-    //   this.userDetails.username = currentUser.username;
-    //   this.userDetails.name = currentUser.name;
-
-    //   return this.userDetails.username;
-    // },
-    // name() {
-    //   return this.userDetails.name;
-    // }
   },
 };
 </script>
 
 <style scoped>
+body > .title {
+  margin: 0;
+}
+
 .post {
-  height: 300px;
   width: 80%;
   margin: 2% auto;
   box-shadow: 2px 2px 7px grey;
-}
-
-.post > .row {
-  margin: 5%;
-  margin-top: 7%;
 }
 
 p {
@@ -109,8 +94,9 @@ p {
 }
 
 .title {
-  font-size: 200%;
+  font-size: 150%;
   font-weight: 600;
+  margin-bottom: 2%;
 }
 
 .title > a {
@@ -127,14 +113,14 @@ p {
 .button > a {
   color: black;
 }
- 
+
 .button:hover {
   background-color: lightgray;
   font-size: 120%;
 }
 
 .userName {
-  text-align: end;
+  float: right;
 }
 
 .userName > a {

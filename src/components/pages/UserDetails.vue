@@ -59,7 +59,6 @@ export default {
           this.userDetails = {
             ...res.data,
           };
-          console.log(this.userDetails);
         })
         .catch((error) => console.log(error));
     },

@@ -1,39 +1,29 @@
 <template>
-<span>@sdfsd{{ username }} - {{ name }}</span>
+<span v-if="username && name">@{{ username }} - {{ name }}</span>
 </template>
 
 <script>
-// import axios from 'axios';
 export default {
   name: 'PostUserInfo',
   props: ['userId', 'users'],
-  created() {
-    // this.getUsers();
-  },
   data() {
     return {
-    // allUsers: []
+      user2: null
     }
   },
   computed: {
     username: function() {
       var user1 = this.users.find(user => user.id === this.userId);
-      return user1.username;
+      if (user1) {
+        return user1.username;
+      }
+      else return null;
     },
     name: function() {
       var user2 = this.users.find(user => user.id === this.userId);
-      return user2.name;
-    }
+      if (user2) return user2.name;
+      else return null;
+    },
   },
-  methods: {
-    // getUsers() {
-    //   axios.get('https://jsonplaceholder.typicode.com/users')
-    //     .then(res => {
-    //       this.allUsers = res.data;
-    //     })
-    //     .catch(error => console.log(error)
-    //     );
-    // },
-  }
 }
 </script>
